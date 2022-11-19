@@ -1,0 +1,21 @@
+class node:
+    def __init__(self, x):
+        self.data,self.left_node,self.right_node= x,None,None
+def gettingSum(root):
+    if(root == None):
+        return 0
+    return (gettingSum(root.left_node) +root.data +gettingSum(root.right_node))
+def isBinaryTreeSumTree(node):
+    if(node == None or(node.left_node == None and node.right_node == None)):
+        return 1
+    ls,rs = gettingSum(node.left_node),gettingSum(node.right_node)
+    if((node.data == ls + rs) and isBinaryTreeSumTree(node.left_node) and isBinaryTreeSumTree(node.right_node)):
+        return 1
+    return 0
+root = node(26)
+root.left_node= node(10)
+root.right_node = node(3)
+root.left_node.left_node = node(4)
+root.left_node.right_node= node(6)
+root.right_node.right_node = node(3)
+print(isBinaryTreeSumTree(root))
